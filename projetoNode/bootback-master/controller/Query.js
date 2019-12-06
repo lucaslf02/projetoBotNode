@@ -2,53 +2,26 @@ let server = require("server.js")
 let dateFormat = require('dateformat');
 let errs = require('restify-errors');
 
-server.get('/specialty/:id', (req, res, next) => {
-    let { id } = req.params;
-    id = id.replace('-', '/');
-    console.log(id);
+class Specialty{
+    async getSpeciality(req, res){
+        server.get('/specialty/:id', (req, res, next) => {
+            let { id } = req.params;
+            id = id.replace('-', '/');
+          
+            knex('especialidade')
+                .where('cNmEspecialidade', id)
+                .first()
+                .then((dados) => {
+                    if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
+                    res.send(dados);
+        
+                }, next);
+        
+        });
+    }
+}
 
-    knex('especialidade')
-        .where('cNmEspecialidade', id)
-        .first()
-        .then((dados) => {
-            if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
-            res.send(dados);
 
-        }, next);
-
-});
-
-server.get('/horarios/:id', (req, res, next) => {
-
-    const { id } = req.params;
-
-    knex('HORARIOS')
-        .where('nCdHorario', id)
-        .first()
-        .then((dados) => {
-            if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
-            res.send(dados);
-
-        }, next);
-
-});
-
-server.get('/r/datas/desabilitadas/:meses', (req, res, next) => {
-    console.log("caiuss");
-    const { meses } = req.params;
-    let data_atual = new Date();
-    let data_futura = new Date();
-    data_futura.addMonths(parseInt(meses));
-
-    console.log(dateFormat(data_atual, 'yyyy-mm-dd'));
-    console.log(dateFormat(data_futura, 'yyyy-mm-dd'));
-
-    knex('HORARIOS').whereBetween('dHoraInicial', [dateFormat(data_atual, 'yyyy-mm-dd'), dateFormat(data_futura, 'yyyy-mm-dd')])
-        .then((dados) => {
-            if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
-            res.send(dados);
-        }, next);
-});
 
 server.get('/tipoConsulta/:id', (req, res, next) => {
     const { id } = req.params;
@@ -158,4 +131,20 @@ server.get('/consultaTipoExame', function(req, res) {
                         })
                     })
              });
+             server.get('/horarios/:id', (req, res, next) => {
+
+                const { id } = req.params;
+            
+                knex('HORARIOS')
+                    .where('nCdHorario', id)
+                    .first()
+                    .then((dados) => {
+                        if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
+                        res.send(dados);
+            
+                    }, next);
+            
+            });
+
+module.exports = new Specialty()
         
