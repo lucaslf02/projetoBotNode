@@ -7,9 +7,7 @@ const server = restify.createServer({
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
-
-
-server.use(require('routes.js'))
+server.use(require('./routes'))
 
 
 server.listen(3001, function () {
