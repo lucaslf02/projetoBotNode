@@ -1,11 +1,13 @@
-const routes = require('restify-router').Router;
+const Router = require('restify-router').Router;
+const routes = new Router();
+const server = require("./server")
 const Specialty = require("../controller/Specialty")
 const Patient = require("../controller/Patient")
 const Exam = require('../controller/Exam')
 const Hospitality = require('../controller/Hospitality')
-const Query = require('../controller/Query')
+const Query = require('../controller/Query');
 
-routes.get('/getAllpatient', Patient.getAllPatient)
+routes.get('/getAllpatient', Patient.getAllPatient);
 routes.get('/patient/:id', Patient.getPatientByCpf)
 routes.post('/patient', Patient.insertPatient)
 routes.put('/patient/update/:id', Patient.updatePatientByCpf)
@@ -34,5 +36,6 @@ routes.get('/returnAllQueryInDatabase', Query.returnAllQueryInDatabase)
 routes.post('/insertQueryInDatabase', Query.insertQueryInDatabase)
 routes.get('/returnTimeById:id', Query.timesInDatabase)
 
+routes.applyRoutes(server)
 
 module.exports = routes

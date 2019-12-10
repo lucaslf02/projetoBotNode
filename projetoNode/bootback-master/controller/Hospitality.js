@@ -1,6 +1,6 @@
 let errs = require('restify-errors');
 let knexconfig = require('../knex_config');
-let knex = knexconfig.knex_config();
+let knex = require('knex')
 
 
 class Hospitality{

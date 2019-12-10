@@ -1,6 +1,15 @@
 let errs = require('restify-errors');
-let knexconfig = require('../knex_config');
-let knex = knexconfig.knex_config();
+
+let knex = require('knex')({
+    client: 'mssql',
+    connection: {
+        host: 'localhost',
+        user: 'sa',
+        password: '12345678',
+        database: 'dbLucca',
+        port: 1433
+    }
+});
 
 class Patient{
         async getAllPatient(){

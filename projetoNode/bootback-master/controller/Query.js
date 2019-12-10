@@ -1,7 +1,15 @@
 const dateFormat = require('dateformat');
 const errs = require('restify-errors');
-let knexconfig = require('../knex_config');
-let knex = knexconfig.knex_config();
+let knex = require('knex')({
+    client: 'mssql',
+    connection: {
+        host: 'localhost',
+        user: 'lucasUm',
+        password: '987654321',
+        database: 'dbLucca',
+        port: 1412
+    }
+});
 
 class Query{
     async typeQuery(id){
