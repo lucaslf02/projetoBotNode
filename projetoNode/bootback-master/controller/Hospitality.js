@@ -14,7 +14,7 @@ class Hospitality{
                 if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
                 res.send(dados);
             
-            }, next);
+            });
     
     };
 

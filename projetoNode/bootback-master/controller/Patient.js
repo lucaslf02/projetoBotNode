@@ -3,19 +3,21 @@ let config = require('../knex_config')
 let knex = require('knex')(config)
 
 class Patient{
-        async getAllPatient(){
+        async getAllPatient(req, res){
             knex('paciente').then((dados) => {
                 res.send(dados);
-            }, next)
+            })
         
         };
 
         async insertPatient(req,res){
+            let insertInDatabase = req.body;
+     
             knex('paciente')
-                .insert(req.body)
+                .insert(insertInDatabase)
                 .then((dados) => {
                     res.send(dados);
-                }, next)
+                })
         };
 
         async getPatientByCpf(req, res){
@@ -26,7 +28,7 @@ class Patient{
                 .then((dados) => {
                     if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
                     res.send(dados);
-                }, next)
+                })
         };
 
         async updatePatientByCpf(req, res){
@@ -37,7 +39,7 @@ class Patient{
                 .then((dados) => {
                     if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
                     res.send('dados atualizados');
-                }, next)
+                })
         };
 
         async deletePatientByCpf(req, res){
@@ -48,7 +50,7 @@ class Patient{
                 .then((dados) => {
                     if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
                     res.send('dados excluidos');
-                }, next)
+                })
             
         };
 }

@@ -8,7 +8,7 @@ const Query = require('../controller/Query')
 
 routes.get('/getAllpatient', Patient.getAllPatient)
 routes.get('/patient/:id', Patient.getPatientByCpf)
-routes.post('/patient', Patient.insertPatient)
+routes.post('/insertPatient', Patient.insertPatient)
 routes.put('/patient/update/:id', Patient.updatePatientByCpf)
 routes.del('/patient/delete/:id', Patient.deletePatientByCpf)
 

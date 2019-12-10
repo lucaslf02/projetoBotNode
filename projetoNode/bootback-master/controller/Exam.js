@@ -69,7 +69,7 @@ class Exam{
                 res.send(new errs.BadRequestError('nada foi encontrado'))
                 res.send(dados);
     
-            }, next); 
+            }); 
     }
     async getDateForAvailableExam(nCdHospitalparam){
         const { nCdHospital } = nCdHospitalparam;

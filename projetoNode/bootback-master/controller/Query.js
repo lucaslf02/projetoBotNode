@@ -13,7 +13,7 @@ class Query{
             .then((dados) => {
                 if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
                 res.send(dados);
-            }, next);
+            });
     };
     async returnQuery(id, req, res){
     {
@@ -90,7 +90,7 @@ class Query{
                 if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado'))
                 res.send(dados);
     
-            }, next);
+            });
     
         };
 

@@ -2,8 +2,8 @@ module.exports = {
     client: 'mssql',
     connection: {
         host: 'localhost',
-        user: 'lucasUm',
-        password: '987654321',
+        user: 'sa',
+        password: '12345678',
         database: 'dbLucca',
         port: 1433,
     }
